@@ -171,15 +171,11 @@
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
         // console.log(paramId, param);
-
-
         // for every option in this category
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
           // console.log(optionId, option);
-
-
           if (formData[paramId].includes(optionId) && !option.default) {
             price += option.price;
           }
@@ -233,6 +229,7 @@
 
     prepareCartProductParams() {
       const thisProduct = this;
+      const productSummary = {};
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
 
@@ -240,19 +237,22 @@
       for (let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
-        // console.log(paramId, param);
+        productSummary[paramId] = {
+          label: param.label,
+          options: {},
+        };
 
         // for every option in this category
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
-          
+          const option = param.options[optionId];
           if (formData[paramId].includes(optionId)) {
-
+            productSummary[paramId].options[optionId] = option.label;
           }
         }
       }
 
-      // return { ingredients };
+      return productSummary;
     }
   }
 
@@ -331,6 +331,7 @@
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = element.querySelector(select.containerOf.menu);
     }
 
     initAction() {
@@ -341,7 +342,13 @@
     }
 
     add(menuProduct) {
-      // const thisCart = this;
+      const thisCart = this;
+      const generatedHTML = templates.cartProduct(menuProduct);
+      // const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      // console.log(thisCart.generatedDOM);
+      const cartContainer = document.querySelector(select.containerOf.cart);
+      cartContainer.appendChild(thisCart.generatedDOM);
 
       console.log('adding product', menuProduct);
     }
