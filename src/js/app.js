@@ -1,4 +1,4 @@
-import { settings, select, classNames, templates } from './settings.js';
+import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
@@ -59,7 +59,7 @@ const app = {
     for (const link of thisApp.navLinks) {
       link.classList.toggle(
         classNames.nav.active,
-        link.getAttribute('href') == '#/' + pageId
+        link.getAttribute('href') == '#' + pageId
       );
     }
   },
@@ -103,26 +103,10 @@ const app = {
 
   init: function () {
     const thisApp = this;
-    console.log('*** App starting ***');
-    console.log('thisApp:', thisApp);
-    console.log('classNames:', classNames);
-    console.log('settings:', settings);
-    console.log('templates:', templates);
-
     thisApp.initPages();
-    
     thisApp.initData();
     thisApp.initCart();
-
     thisApp.initBooking();
-    
-    // fetch('http://localhost:3003/products', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(thisApp),
-    // });
   },
 };
 

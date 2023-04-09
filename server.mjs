@@ -16,23 +16,23 @@ app.get('/', (req, res) => {
 });
 
 const products = [
-    {
-        name: 'book',
-        count: 20,
-    },
-    {
-        name: 'perosn',
-        count: 30,
-    }
-  ]
+  {
+    name: 'book',
+    count: 20,
+  },
+  {
+    name: 'perosn',
+    count: 30,
+  }
+];
 
 app.get('/products', (req, res) => {
   res.json(products);
 });
 
 app.post('/products', (req, res) => {
-    products.push(req.body);
-    res.send('Success!');
+  products.push(req.body);
+  res.send('Success!');
 });
 
 
