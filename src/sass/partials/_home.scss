@@ -1,0 +1,200 @@
+#home {
+  #home-wrapper {
+    margin: 50px auto;
+    background-color: white;
+    padding: 5px 5%;
+    width: 75%;
+    max-width: 1000px;
+
+    >* {
+      margin: 50px auto;
+    }
+  }
+}
+
+#home-wrapper .infoCard {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .action {
+    display: flex;
+    gap: 10px;
+    flex: 100%;
+
+    >a {
+      width: 50%;
+      height: 150px;
+      background-position: cover;
+      background-position: center;
+      text-decoration: none;
+    }
+
+    >a>div {
+      border-radius: 5px;
+      height: 100%;
+      color: white;
+
+    }
+
+    .order {
+      background-image: url('../../images/assets/pizza-1.jpg');
+    }
+
+    .book {
+      background-image: url('../../images/assets/pizza-2.jpg');
+    }
+
+
+    .order,
+    .book {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden !important;
+
+      >* {
+        margin: 0;
+      }
+
+      p {
+        position: relative;
+        bottom: -50px;
+        opacity: 0;
+        height: 0;
+      }
+    }
+
+    .order:hover p,
+    .book:hover p {
+      animation: showActionParagraph;
+      animation-timing-function: ease-in-out;
+      animation-duration: .2s;
+      animation-fill-mode: both;
+      animation-direction: normal;
+    }
+
+    @keyframes showActionParagraph {
+      100% {
+        margin-top: 20px;
+        opacity: 1;
+        bottom: 0;
+      }
+    }
+  }
+
+  .workHours {
+    border-radius: 5px;
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background-color: palevioletred;
+
+    >* {
+      margin: 0;
+    }
+  }
+}
+
+#home-wrapper .main-carousel {
+  height: 40vh;
+  margin-bottom: 80px !important;
+
+  .carousel-cell {
+    width: 100%;
+    padding: 0 10%;
+    position: relative;
+    display: flex;
+
+    >* {
+      margin: 0 2vw;
+    }
+
+    img {
+      margin-top: auto;
+      margin-bottom: auto;
+      width: 200px;
+      height: 200px;
+      position: relative;
+      object-fit: cover;
+    }
+
+    .content {
+      .author {
+        font-style: italic;
+        padding: 20px 10px;
+      }
+    }
+  }
+}
+
+#home-wrapper .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-auto-rows: 200px;
+  max-width: 700px;
+  justify-content: center;
+  gap: 10px;
+
+  div {
+    position: relative;
+    overflow: hidden;
+
+    .overlay {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      font-size: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .5em;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+
+      i {
+        opacity: .5;
+        transition: 0.25s all ease-in-out;
+        color: white;
+      }
+    }
+
+    img {
+      position: relative;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      transition: 0.5s all ease-in-out;
+    }
+  }
+
+  div:hover {
+    .overlay {
+      opacity: 1;
+      cursor: pointer;
+
+      i:hover {
+        opacity: 1;
+        transform: scale(1.2);
+        color: palevioletred;
+      }
+    }
+
+    img {
+      transform: scale(1.1);
+    }
+  }
+}
